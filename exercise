@@ -1,0 +1,59 @@
+import matplotlib.colors as cl
+import matplotlib.pyplot as plt
+import pandas as pd
+import row64
+import seaborn as sns
+
+def ScatterPlotBasic(inDf, inCol1, inCol2):
+	col1 = inDf.columns[inCol1]
+	col2 = inDf.columns[inCol2]
+	sns.scatterplot(color="#1F77B4",data=inDf,x=col1,y=col2,s=25)
+
+#IMPORT("C:\Users\n2283\OneDrive\Desktop\Car details v3.csv")
+dfIn=row64.get_dataframe("Dataframe4")
+df=dfIn.copy(deep=True)
+ScatterPlotBasic(df,1,2)
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import row64
+
+def LinReg(inDf, inInd1, inInd2):
+	values1 = inDf[inDf.columns[inInd1]]
+	values2 = inDf[inDf.columns[inInd2]]
+	fig, ax = plt.subplots(figsize = (9, 9))
+	ax.scatter(values1, values2, s=60, alpha=0.7, edgecolors="k")
+	b, a = np.polyfit(values1, values2, deg=1)
+	print("intercept: ", a)
+	print("coefficient: ", b)
+	xmin = min(values1)
+	xmax = max(values1)
+	xrng = xmax - xmin
+	xseq = np.linspace(xmin-.1*xrng, xmax+.1*xrng, num=10)
+	ax.plot(xseq, a + b * xseq, color="k", lw=2.5)
+
+#IMPORT("C:\Users\n2283\OneDrive\Desktop\Car details v3.csv")
+dfIn=row64.get_dataframe("Dataframe3")
+df=dfIn.copy(deep=True)
+LinReg(df,2,3)
+
+import matplotlib.colors as cl
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import row64
+
+def Scatter3D(inDf, inXI, inYI, inZI, inViewRot):
+	xv = inDf[inDf.columns[inXI]]
+	yv = inDf[inDf.columns[inYI]]
+	zv = inDf[inDf.columns[inZI]]
+	fig = plt.figure()
+	ax = fig.add_subplot(111, projection='3d')
+	ax.scatter(xv,yv,zv, c='#0055FF', s=15)
+	ax.view_init(30, inViewRot)
+
+#IMPORT("C:\Users\n2283\OneDrive\Desktop\Car details v3.csv")
+dfIn=row64.get_dataframe("Dataframe3")
+df=dfIn.copy(deep=True)
+Scatter3D(df,2,3,1,-65)
